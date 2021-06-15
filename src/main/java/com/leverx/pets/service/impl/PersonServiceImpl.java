@@ -2,6 +2,7 @@ package com.leverx.pets.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leverx.pets.dto.PersonDto;
+import com.leverx.pets.exception.custom.PersonNotFoundException;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.repository.PersonRepository;
 import com.leverx.pets.service.PersonService;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -29,6 +29,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person create(PersonDto personDto) {
+
         Person person = objectMapper.convertValue(personDto, Person.class);
         personRepository.save(person);
         return person;
@@ -41,9 +42,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getById(Long id) {
+
         return personRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Person not found"));
+                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
     }
 
     @Override
@@ -52,10 +54,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person update(PersonDto personDto) {
+    public Person update(PersonDto personDto, Long id) {
+
         Person person = personRepository
-                .findById(personDto.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Person doesn't exist"));
+                .findById(id)
+                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
         person.setName(personDto.getName());
         personRepository.save(person);
         return person;

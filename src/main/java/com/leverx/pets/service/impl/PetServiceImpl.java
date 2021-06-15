@@ -2,6 +2,8 @@ package com.leverx.pets.service.impl;
 
 import com.leverx.pets.dto.PetDto;
 import com.leverx.pets.dto.UpdatePetDto;
+import com.leverx.pets.exception.custom.PersonNotFoundException;
+import com.leverx.pets.exception.custom.PetNotFoundException;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.repository.PersonRepository;
@@ -12,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 import static com.leverx.pets.factory.PetFactory.getPet;
@@ -37,7 +38,7 @@ public class PetServiceImpl implements PetService {
         Pet pet = getPet(petDto.getPetType());
         Person person = personRepository
                 .findById(petDto.getPersonId())
-                .orElseThrow(() -> new EntityNotFoundException("Person doesn't exist"));
+                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
         pet.setName(petDto.getName());
         pet.setPerson(person);
         petRepository.save(pet);
@@ -53,7 +54,7 @@ public class PetServiceImpl implements PetService {
     public Pet getById(Long id) {
         return petRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Pet not found"));
+                .orElseThrow(() -> new PetNotFoundException("Pet isn't found"));
     }
 
     @Override
@@ -62,10 +63,10 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet update(UpdatePetDto petDto) {
+    public Pet update(UpdatePetDto petDto, Long id) {
         Pet pet = petRepository
-                .findById(petDto.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Pet not found"));
+                .findById(id)
+                .orElseThrow(() -> new PetNotFoundException("Pet isn't found"));
         pet.setName(petDto.getName());
         petRepository.save(pet);
         return pet;
