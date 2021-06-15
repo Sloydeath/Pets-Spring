@@ -5,9 +5,6 @@ import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.enums.PetType;
 import lombok.Data;
 
-import javax.validation.Valid;
-
-@Valid
 @Data
 public class UpdatePetDto {
 
