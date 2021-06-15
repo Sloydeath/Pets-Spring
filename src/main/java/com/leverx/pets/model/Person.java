@@ -21,7 +21,6 @@ import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.FetchType.LAZY;
 
 @Data
-@Valid
 @NoArgsConstructor
 @Entity
 @Table(name = "person")
