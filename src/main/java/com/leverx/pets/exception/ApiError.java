@@ -2,22 +2,20 @@ package com.leverx.pets.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
-/**
- * This class is a model of error @ResponseBody
- *
- * @author Andrew Panas
- */
-
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiError {
 
+    private HttpStatus status;
     private String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
