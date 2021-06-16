@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.leverx.pets.util.ExceptionMessageUtil.PERSON_ERROR_PATTERN;
+import static java.lang.String.format;
+
 @Service
 @Transactional
 @Slf4j
@@ -45,7 +48,7 @@ public class PersonServiceImpl implements PersonService {
 
         return personRepository
                 .findById(id)
-                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
+                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id)));
     }
 
     @Override
@@ -58,7 +61,7 @@ public class PersonServiceImpl implements PersonService {
 
         Person person = personRepository
                 .findById(id)
-                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
+                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id)));
         person.setName(personDto.getName());
         personRepository.save(person);
         return person;

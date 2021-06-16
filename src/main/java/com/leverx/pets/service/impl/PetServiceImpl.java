@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.leverx.pets.factory.PetFactory.getPet;
+import static com.leverx.pets.util.ExceptionMessageUtil.PERSON_ERROR_PATTERN;
+import static com.leverx.pets.util.ExceptionMessageUtil.PET_ERROR_PATTERN;
+import static java.lang.String.format;
 
 @Service
 @Transactional
@@ -38,7 +41,7 @@ public class PetServiceImpl implements PetService {
         Pet pet = getPet(petDto.getPetType());
         Person person = personRepository
                 .findById(petDto.getPersonId())
-                .orElseThrow(() -> new PersonNotFoundException("Person isn't found"));
+                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, petDto.getPersonId())));
         pet.setName(petDto.getName());
         pet.setPerson(person);
         petRepository.save(pet);
@@ -54,7 +57,7 @@ public class PetServiceImpl implements PetService {
     public Pet getById(Long id) {
         return petRepository
                 .findById(id)
-                .orElseThrow(() -> new PetNotFoundException("Pet isn't found"));
+                .orElseThrow(() -> new PetNotFoundException(format(PET_ERROR_PATTERN, id)));
     }
 
     @Override
@@ -66,7 +69,7 @@ public class PetServiceImpl implements PetService {
     public Pet update(UpdatePetDto petDto, Long id) {
         Pet pet = petRepository
                 .findById(id)
-                .orElseThrow(() -> new PetNotFoundException("Pet isn't found"));
+                .orElseThrow(() -> new PetNotFoundException(format(PET_ERROR_PATTERN, id)));
         pet.setName(petDto.getName());
         petRepository.save(pet);
         return pet;
