@@ -48,7 +48,10 @@ public class PersonServiceImpl implements PersonService {
 
         return personRepository
                 .findById(id)
-                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id)));
+                .orElseThrow(() -> {
+                    log.debug(format(PERSON_ERROR_PATTERN, id));
+                    return new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id));
+                });
     }
 
     @Override
@@ -61,7 +64,11 @@ public class PersonServiceImpl implements PersonService {
 
         Person person = personRepository
                 .findById(id)
-                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id)));
+                .orElseThrow(() -> {
+                    log.debug(format(PERSON_ERROR_PATTERN, id));
+                    return new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id));
+                });
+
         person.setName(personDto.getName());
         personRepository.save(person);
         return person;

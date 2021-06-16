@@ -18,8 +18,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.leverx.pets.util.ControllerConstantUtil.PERSON_CONTROLLER_ENDPOINT;
-import static java.util.Objects.nonNull;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -38,27 +36,21 @@ public class PersonController {
     public ResponseEntity<List<Person>> getAllPeople() {
 
         List<Person> people = personService.getAll();
-        return !people.isEmpty()
-                ? new ResponseEntity<>(people, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(people, OK);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> getPersonById(@PathVariable Long id) {
 
         Person person = personService.getById(id);
-        return nonNull(person)
-                ? new ResponseEntity<>(person, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(person, OK);
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> savePerson(@Valid @RequestBody PersonDto personDto) {
 
        Person person = personService.create(personDto);
-       return nonNull(person)
-               ? new ResponseEntity<>(person, OK)
-               : new ResponseEntity<>(NOT_FOUND);
+       return new ResponseEntity<>(person, OK);
     }
 
     @PutMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
@@ -66,9 +58,7 @@ public class PersonController {
                                                @PathVariable Long id) {
 
         Person person = personService.update(personDto, id);
-        return nonNull(person)
-                ? new ResponseEntity<>(person, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(person, OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)

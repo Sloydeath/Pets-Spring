@@ -16,7 +16,7 @@ public class PetFactory {
             case DOG:
                 return new Dog();
             default:
-                throw new PetNotFoundException("Pet isn't found");
+                throw new PetNotFoundException("Pet not found");
         }
     }
 }

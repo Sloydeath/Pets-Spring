@@ -41,7 +41,11 @@ public class PetServiceImpl implements PetService {
         Pet pet = getPet(petDto.getPetType());
         Person person = personRepository
                 .findById(petDto.getPersonId())
-                .orElseThrow(() -> new PersonNotFoundException(format(PERSON_ERROR_PATTERN, petDto.getPersonId())));
+                .orElseThrow(() -> {
+                    log.debug(format(PERSON_ERROR_PATTERN, petDto.getPersonId()));
+                    return new PersonNotFoundException(format(PERSON_ERROR_PATTERN, petDto.getPersonId()));
+                });
+
         pet.setName(petDto.getName());
         pet.setPerson(person);
         petRepository.save(pet);
@@ -57,7 +61,10 @@ public class PetServiceImpl implements PetService {
     public Pet getById(Long id) {
         return petRepository
                 .findById(id)
-                .orElseThrow(() -> new PetNotFoundException(format(PET_ERROR_PATTERN, id)));
+                .orElseThrow(() -> {
+                    log.debug(format(PET_ERROR_PATTERN, id));
+                    return new PetNotFoundException(format(PET_ERROR_PATTERN, id));
+                });
     }
 
     @Override
@@ -69,7 +76,11 @@ public class PetServiceImpl implements PetService {
     public Pet update(UpdatePetDto petDto, Long id) {
         Pet pet = petRepository
                 .findById(id)
-                .orElseThrow(() -> new PetNotFoundException(format(PET_ERROR_PATTERN, id)));
+                .orElseThrow(() -> {
+                    log.debug(format(PET_ERROR_PATTERN, id));
+                    return new PetNotFoundException(format(PET_ERROR_PATTERN, id));
+                });
+
         pet.setName(petDto.getName());
         petRepository.save(pet);
         return pet;

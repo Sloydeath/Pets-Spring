@@ -19,8 +19,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.leverx.pets.util.ControllerConstantUtil.PET_CONTROLLER_ENDPOINT;
-import static java.util.Objects.nonNull;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -39,27 +37,21 @@ public class PetController {
     public ResponseEntity<List<Pet>> getAllPets() {
 
         List<Pet> pets = petService.getAll();
-        return !pets.isEmpty()
-                ? new ResponseEntity<>(pets, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(pets, OK);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 
         Pet pet = petService.getById(id);
-        return nonNull(pet)
-                ? new ResponseEntity<>(pet, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(pet, OK);
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Pet> savePet(@Valid @RequestBody PetDto petDto) {
 
         Pet pet = petService.create(petDto);
-        return nonNull(pet)
-                ? new ResponseEntity<>(pet, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(pet, OK);
     }
 
     @PutMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
@@ -67,9 +59,7 @@ public class PetController {
                                                @PathVariable Long id) {
 
         Pet pet = petService.update(petDto, id);
-        return nonNull(pet)
-                ? new ResponseEntity<>(pet, OK)
-                : new ResponseEntity<>(NOT_FOUND);
+        return new ResponseEntity<>(pet, OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
