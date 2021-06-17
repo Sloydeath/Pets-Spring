@@ -1,8 +1,8 @@
 package com.leverx.pets.controller;
 
-import com.leverx.pets.dto.PetDto;
-import com.leverx.pets.dto.SwappingPetsDto;
-import com.leverx.pets.dto.UpdatePetDto;
+import com.leverx.pets.dto.pet.PetDto;
+import com.leverx.pets.dto.pet.SwappingPetsDto;
+import com.leverx.pets.dto.pet.UpdatePetDto;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;

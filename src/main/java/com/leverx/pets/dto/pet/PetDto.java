@@ -1,18 +1,23 @@
-package com.leverx.pets.dto;
+package com.leverx.pets.dto.pet;
 
 import com.leverx.pets.annotations.ValidName;
-import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.enums.PetType;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 @Data
-public class UpdatePetDto {
+public class PetDto {
 
     private Long id;
 
     @ValidName
     private String name;
 
+    @NotNull
     private PetType petType;
-    private Person person;
+
+    @Positive
+    private Long personId;
 }

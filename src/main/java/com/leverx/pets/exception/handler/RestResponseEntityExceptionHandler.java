@@ -89,7 +89,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .status(BAD_REQUEST)
                 .message(exception.getLocalizedMessage())
                 .build();
-        return new ResponseEntity<>(apiError, NOT_FOUND);
+        return new ResponseEntity<>(apiError, BAD_REQUEST);
     }
 
     // 404

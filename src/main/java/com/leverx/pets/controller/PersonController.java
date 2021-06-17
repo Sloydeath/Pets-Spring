@@ -1,6 +1,6 @@
 package com.leverx.pets.controller;
 
-import com.leverx.pets.dto.PersonDto;
+import com.leverx.pets.dto.person.PersonDto;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.leverx.pets.dto;
+package com.leverx.pets.dto.pet;
 
 import lombok.Data;
 

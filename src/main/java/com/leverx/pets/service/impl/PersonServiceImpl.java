@@ -1,7 +1,7 @@
 package com.leverx.pets.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leverx.pets.dto.PersonDto;
+import com.leverx.pets.dto.person.PersonDto;
 import com.leverx.pets.exception.custom.PersonNotFoundException;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.repository.PersonRepository;

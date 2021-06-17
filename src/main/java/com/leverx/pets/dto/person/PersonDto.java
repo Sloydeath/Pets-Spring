@@ -1,4 +1,4 @@
-package com.leverx.pets.dto;
+package com.leverx.pets.dto.person;
 
 import com.leverx.pets.annotations.ValidName;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.leverx.pets.service;
 
-import com.leverx.pets.dto.PersonDto;
+import com.leverx.pets.dto.person.PersonDto;
 import com.leverx.pets.model.Person;
 
 import java.util.List;

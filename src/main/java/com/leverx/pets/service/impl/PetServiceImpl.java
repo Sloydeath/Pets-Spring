@@ -1,8 +1,8 @@
 package com.leverx.pets.service.impl;
 
-import com.leverx.pets.dto.PetDto;
-import com.leverx.pets.dto.SwappingPetsDto;
-import com.leverx.pets.dto.UpdatePetDto;
+import com.leverx.pets.dto.pet.PetDto;
+import com.leverx.pets.dto.pet.SwappingPetsDto;
+import com.leverx.pets.dto.pet.UpdatePetDto;
 import com.leverx.pets.exception.custom.PersonNotFoundException;
 import com.leverx.pets.exception.custom.PetNotFoundException;
 import com.leverx.pets.exception.custom.SimilarPersonException;
