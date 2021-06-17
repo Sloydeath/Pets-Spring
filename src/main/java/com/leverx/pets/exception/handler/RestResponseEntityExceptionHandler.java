@@ -2,6 +2,7 @@ package com.leverx.pets.exception.handler;
 
 import com.leverx.pets.exception.ApiError;
 import com.leverx.pets.exception.custom.EntityNotFoundException;
+import com.leverx.pets.exception.custom.SimilarPersonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,12 +18,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static com.leverx.pets.exception.ApiError.*;
-import static com.leverx.pets.util.ExceptionMessageUtil.ENTITY_EXCEPTION;
-import static com.leverx.pets.util.ExceptionMessageUtil.INTERNAL_ERROR;
-import static com.leverx.pets.util.ExceptionMessageUtil.INVALID_FORMAT;
-import static com.leverx.pets.util.ExceptionMessageUtil.URL_NOT_FOUND;
+import static com.leverx.pets.util.ExceptionMessageUtil.ENTITY_EXCEPTION_MESSAGE;
+import static com.leverx.pets.util.ExceptionMessageUtil.INTERNAL_ERROR_MESSAGE;
+import static com.leverx.pets.util.ExceptionMessageUtil.INVALID_FORMAT_MESSAGE;
+import static com.leverx.pets.util.ExceptionMessageUtil.URL_NOT_FOUND_MESSAGE;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -39,7 +41,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         ApiError apiError = builder()
                 .status(status)
-                .message(format(MESSAGE_PATTERN, URL_NOT_FOUND, exception.getLocalizedMessage()))
+                .message(format(MESSAGE_PATTERN, URL_NOT_FOUND_MESSAGE, exception.getLocalizedMessage()))
                 .build();
         return handleExceptionInternal(exception, apiError, headers, status, request);
     }
@@ -68,7 +70,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         ApiError apiError = builder()
                 .status(status)
-                .message(format(MESSAGE_PATTERN, INVALID_FORMAT, exception.getLocalizedMessage()))
+                .message(format(MESSAGE_PATTERN, INVALID_FORMAT_MESSAGE, exception.getLocalizedMessage()))
                 .errors(exception.getBindingResult()
                         .getFieldErrors()
                         .stream()
@@ -79,13 +81,25 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     // 404
+    @ExceptionHandler(SimilarPersonException.class)
+    public ResponseEntity<Object> handleSwappingOwnersException(final SimilarPersonException exception) {
+        log.debug("404 Status Code: ", exception);
+
+        ApiError apiError = builder()
+                .status(BAD_REQUEST)
+                .message(exception.getLocalizedMessage())
+                .build();
+        return new ResponseEntity<>(apiError, NOT_FOUND);
+    }
+
+    // 404
     @ExceptionHandler({EntityNotFoundException.class, EmptyResultDataAccessException.class})
     public ResponseEntity<Object> handleEntityException(final RuntimeException exception) {
         log.debug("404 Status Code: ", exception);
 
         ApiError apiError = builder()
                 .status(NOT_FOUND)
-                .message(format(MESSAGE_PATTERN, ENTITY_EXCEPTION, exception.getLocalizedMessage()))
+                .message(format(MESSAGE_PATTERN, ENTITY_EXCEPTION_MESSAGE, exception.getLocalizedMessage()))
                 .build();
         return new ResponseEntity<>(apiError, NOT_FOUND);
     }
@@ -97,7 +111,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         ApiError apiError = builder()
                 .status(INTERNAL_SERVER_ERROR)
-                .message(format(MESSAGE_PATTERN, INTERNAL_ERROR, exception))
+                .message(format(MESSAGE_PATTERN, INTERNAL_ERROR_MESSAGE, exception))
                 .build();
         return new ResponseEntity<>(apiError, INTERNAL_SERVER_ERROR);
     }

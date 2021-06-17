@@ -1,6 +1,7 @@
 package com.leverx.pets.controller;
 
 import com.leverx.pets.dto.PetDto;
+import com.leverx.pets.dto.SwappingPetsDto;
 import com.leverx.pets.dto.UpdatePetDto;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.service.PetService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,6 +62,12 @@ public class PetController {
 
         Pet pet = petService.update(petDto, id);
         return new ResponseEntity<>(pet, OK);
+    }
+
+    @PatchMapping(value = "/swapping", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Pet>> swapPets(@Valid @RequestBody SwappingPetsDto swappingPetsDto) {
+        List<Pet> pets = petService.swappingPets(swappingPetsDto);
+        return new ResponseEntity<>(pets, OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)

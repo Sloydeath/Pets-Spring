@@ -1,9 +1,11 @@
 package com.leverx.pets.service.impl;
 
 import com.leverx.pets.dto.PetDto;
+import com.leverx.pets.dto.SwappingPetsDto;
 import com.leverx.pets.dto.UpdatePetDto;
 import com.leverx.pets.exception.custom.PersonNotFoundException;
 import com.leverx.pets.exception.custom.PetNotFoundException;
+import com.leverx.pets.exception.custom.SimilarPersonException;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.repository.PersonRepository;
@@ -15,11 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.leverx.pets.factory.PetFactory.getPet;
 import static com.leverx.pets.util.ExceptionMessageUtil.PERSON_ERROR_PATTERN;
 import static com.leverx.pets.util.ExceptionMessageUtil.PET_ERROR_PATTERN;
+import static com.leverx.pets.util.ExceptionMessageUtil.SIMILAR_PEOPLE_MESSAGE;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 @Service
 @Transactional
@@ -85,4 +90,42 @@ public class PetServiceImpl implements PetService {
         petRepository.save(pet);
         return pet;
     }
+
+    @Override
+    public List<Pet> swappingPets(SwappingPetsDto swappingPetsDto) {
+
+        Pet firstPet = getById(swappingPetsDto.getFirstPetId());
+        Pet secondPet = getById(swappingPetsDto.getSecondPetId());
+
+        if (!Objects.equals(firstPet.getPerson(), secondPet.getPerson())) {
+            return executeSwappingOwners(firstPet, secondPet);
+        }
+        else {
+            throw new SimilarPersonException(SIMILAR_PEOPLE_MESSAGE);
+        }
+    }
+
+    public List<Pet> executeSwappingOwners(Pet firstPet, Pet secondPet) {
+
+        Person tempPetOwner = firstPet.getPerson();
+        firstPet.setPerson(secondPet.getPerson());
+        secondPet.setPerson(tempPetOwner);
+
+        petRepository.save(firstPet);
+        petRepository.save(secondPet);
+
+        return asList(firstPet, secondPet);
+    }
+
 }
+
+/*
+* List<Pet> pets = petMapper.toEntities(swappingPetsDto);
+
+        if (pets.stream().map(Pet::getPerson).collect(toSet()).size() == 2) {
+            return executeSwappingOwners(pets);
+        }
+        else {
+            throw new SimilarPersonException(SIMILAR_PEOPLE_MESSAGE);
+        }
+* */
