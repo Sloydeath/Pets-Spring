@@ -118,14 +118,3 @@ public class PetServiceImpl implements PetService {
     }
 
 }
-
-/*
-* List<Pet> pets = petMapper.toEntities(swappingPetsDto);
-
-        if (pets.stream().map(Pet::getPerson).collect(toSet()).size() == 2) {
-            return executeSwappingOwners(pets);
-        }
-        else {
-            throw new SimilarPersonException(SIMILAR_PEOPLE_MESSAGE);
-        }
-* */
