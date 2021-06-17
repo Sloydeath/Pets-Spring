@@ -98,14 +98,14 @@ public class PetServiceImpl implements PetService {
         Pet secondPet = getById(swappingPetsDto.getSecondPetId());
 
         if (!Objects.equals(firstPet.getPerson(), secondPet.getPerson())) {
-            return executeSwappingOwners(firstPet, secondPet);
+            return executeChangingOwners(firstPet, secondPet);
         }
         else {
             throw new SimilarPersonException(SIMILAR_PEOPLE_MESSAGE);
         }
     }
 
-    public List<Pet> executeSwappingOwners(Pet firstPet, Pet secondPet) {
+    private List<Pet> executeChangingOwners(Pet firstPet, Pet secondPet) {
 
         Person tempPetOwner = firstPet.getPerson();
         firstPet.setPerson(secondPet.getPerson());
