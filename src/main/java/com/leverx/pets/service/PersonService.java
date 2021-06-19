@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PersonService {
 
-    Person create(PersonDto personDto);
+    Person create(Person person);
     List<Person> getAll();
     Person getById(Long id);
     void deleteById(Long id);

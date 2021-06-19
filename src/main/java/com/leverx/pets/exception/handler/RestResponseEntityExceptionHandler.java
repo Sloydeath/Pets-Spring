@@ -10,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +20,6 @@ import static com.leverx.pets.exception.ApiError.*;
 import static com.leverx.pets.util.ExceptionMessageUtil.ENTITY_EXCEPTION_MESSAGE;
 import static com.leverx.pets.util.ExceptionMessageUtil.INTERNAL_ERROR_MESSAGE;
 import static com.leverx.pets.util.ExceptionMessageUtil.INVALID_FORMAT_MESSAGE;
-import static com.leverx.pets.util.ExceptionMessageUtil.URL_NOT_FOUND_MESSAGE;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -33,18 +31,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String MESSAGE_PATTERN = "%s: %s";
-
-    //404
-    @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        log.debug("405 Status Code: ", exception);
-
-        ApiError apiError = builder()
-                .status(status)
-                .message(format(MESSAGE_PATTERN, URL_NOT_FOUND_MESSAGE, exception.getLocalizedMessage()))
-                .build();
-        return handleExceptionInternal(exception, apiError, headers, status, request);
-    }
 
     //400
     @Override

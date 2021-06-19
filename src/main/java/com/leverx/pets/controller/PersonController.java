@@ -1,6 +1,7 @@
 package com.leverx.pets.controller;
 
 import com.leverx.pets.dto.person.PersonDto;
+import com.leverx.pets.mapper.PersonMapper;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static com.leverx.pets.util.ControllerConstantUtil.PERSON_CONTROLLER_ENDPOINT;
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -26,43 +28,56 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class PersonController {
 
     private final PersonService personService;
+    private final PersonMapper personMapper;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, PersonMapper personMapper) {
         this.personService = personService;
+        this.personMapper = personMapper;
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Person>> getAllPeople() {
+    public ResponseEntity<List<PersonDto>> getAllPeople() {
 
-        List<Person> people = personService.getAll();
-        return new ResponseEntity<>(people, OK);
+        List<PersonDto> responsePeopleDto = personService.getAll()
+                .stream()
+                .map(personMapper::convertToPersonDto)
+                .collect(toList());
+
+        return new ResponseEntity<>(responsePeopleDto, OK);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> getPersonById(@PathVariable Long id) {
+    public ResponseEntity<PersonDto> getPersonById(@PathVariable Long id) {
 
         Person person = personService.getById(id);
-        return new ResponseEntity<>(person, OK);
+        PersonDto responsePersonDto = personMapper.convertToPersonDto(person);
+
+        return new ResponseEntity<>(responsePersonDto, OK);
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> savePerson(@Valid @RequestBody PersonDto personDto) {
+    public ResponseEntity<PersonDto> savePerson(@Valid @RequestBody PersonDto receivedPersonDto) {
 
-       Person person = personService.create(personDto);
-       return new ResponseEntity<>(person, OK);
+        Person person = personService.create(personMapper.convertToEntity(receivedPersonDto));
+        PersonDto responsePersonDto = personMapper.convertToPersonDto(person);
+
+        return new ResponseEntity<>(responsePersonDto, OK);
     }
 
     @PutMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> updatePerson(@Valid @RequestBody PersonDto personDto,
+    public ResponseEntity<PersonDto> updatePerson(@Valid @RequestBody PersonDto personDto,
                                                @PathVariable Long id) {
 
         Person person = personService.update(personDto, id);
-        return new ResponseEntity<>(person, OK);
+        PersonDto responsePersonDto = personMapper.convertToPersonDto(person);
+
+        return new ResponseEntity<>(responsePersonDto, OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
+
         personService.deleteById(id);
         return new ResponseEntity<>(OK);
     }

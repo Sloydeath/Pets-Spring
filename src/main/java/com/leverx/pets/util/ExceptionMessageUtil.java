@@ -8,7 +8,6 @@ public class ExceptionMessageUtil {
 
     //Message
     public static final String ENTITY_EXCEPTION_MESSAGE = "Entity exception";
-    public static final String URL_NOT_FOUND_MESSAGE = "URL not found";
     public static final String INVALID_FORMAT_MESSAGE = "Invalid format";
     public static final String INTERNAL_ERROR_MESSAGE = "Internal error";
     public static final String SIMILAR_PEOPLE_MESSAGE = "ids of people are similar";

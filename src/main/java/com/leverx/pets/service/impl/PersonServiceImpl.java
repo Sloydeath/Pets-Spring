@@ -22,18 +22,15 @@ import static java.lang.String.format;
 public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
-    private final ObjectMapper objectMapper;
 
     @Autowired
-    public PersonServiceImpl(PersonRepository personRepository, ObjectMapper objectMapper) {
+    public PersonServiceImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.objectMapper = objectMapper;
     }
 
     @Override
-    public Person create(PersonDto personDto) {
+    public Person create(Person person) {
 
-        Person person = objectMapper.convertValue(personDto, Person.class);
         personRepository.save(person);
         return person;
     }
