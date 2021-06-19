@@ -33,6 +33,7 @@
 		<!--UTIL-->
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<lombok.version>1.18.12</lombok.version>
+		<model.mapper.version>2.4.3</model.mapper.version>
 	</properties>
 
 	<dependencies>
@@ -112,6 +113,11 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${model.mapper.version}</version>
 		</dependency>
 
 	</dependencies>
