@@ -66,10 +66,10 @@ public class PersonController {
     }
 
     @PutMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PersonDto> updatePerson(@Valid @RequestBody PersonDto personDto,
+    public ResponseEntity<PersonDto> updatePerson(@Valid @RequestBody PersonDto receivedPersonDto,
                                                @PathVariable Long id) {
 
-        Person person = personService.update(personDto, id);
+        Person person = personService.update(receivedPersonDto, id);
         PersonDto responsePersonDto = personMapper.convertToPersonDto(person);
 
         return new ResponseEntity<>(responsePersonDto, OK);

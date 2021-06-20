@@ -49,7 +49,7 @@ public class PetServiceImpl implements PetService {
         return petRepository
                 .findById(id)
                 .orElseThrow(() -> {
-                    log.debug(format(PET_ERROR_PATTERN, id));
+                    log.info(format(PET_ERROR_PATTERN, id));
                     return new PetNotFoundException(format(PET_ERROR_PATTERN, id));
                 });
     }
@@ -64,7 +64,7 @@ public class PetServiceImpl implements PetService {
         Pet pet = petRepository
                 .findById(id)
                 .orElseThrow(() -> {
-                    log.debug(format(PET_ERROR_PATTERN, id));
+                    log.info(format(PET_ERROR_PATTERN, id));
                     return new PetNotFoundException(format(PET_ERROR_PATTERN, id));
                 });
 
@@ -83,6 +83,7 @@ public class PetServiceImpl implements PetService {
             return executeChangingOwners(firstPet, secondPet);
         }
         else {
+            log.info("Exception while executing method swappingPets: {}", SIMILAR_PEOPLE_MESSAGE);
             throw new SimilarPersonException(SIMILAR_PEOPLE_MESSAGE);
         }
     }

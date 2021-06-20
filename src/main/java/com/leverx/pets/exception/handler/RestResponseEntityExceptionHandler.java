@@ -35,7 +35,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     //400
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        log.debug("400 Status Code: ", exception);
+        log.info("400 Status Code: {}", exception.getLocalizedMessage());
 
         ApiError apiError = builder()
                 .status(status)
@@ -52,7 +52,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     // 400
     @Override
     protected ResponseEntity<Object> handleBindException(final BindException exception, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
-        log.debug("400 Status Code: ", exception);
+        log.info("400 Status Code: {}", exception.getLocalizedMessage());
 
         ApiError apiError = builder()
                 .status(status)
@@ -66,10 +66,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(exception, apiError, headers, status, request);
     }
 
-    // 404
+    // 400
     @ExceptionHandler(SimilarPersonException.class)
     public ResponseEntity<Object> handleSwappingOwnersException(final SimilarPersonException exception) {
-        log.debug("404 Status Code: ", exception);
+        log.info("400 Status Code: {}", exception.getLocalizedMessage());
 
         ApiError apiError = builder()
                 .status(BAD_REQUEST)
@@ -81,7 +81,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     // 404
     @ExceptionHandler({EntityNotFoundException.class, EmptyResultDataAccessException.class})
     public ResponseEntity<Object> handleEntityException(final RuntimeException exception) {
-        log.debug("404 Status Code: ", exception);
+        log.info("404 Status Code: {}", exception.getLocalizedMessage());
 
         ApiError apiError = builder()
                 .status(NOT_FOUND)
@@ -93,7 +93,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     // 500
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleInternal(final RuntimeException exception) {
-        log.debug("500 Status Code: ", exception);
+        log.info("500 Status Code: {}", exception.getLocalizedMessage());
 
         ApiError apiError = builder()
                 .status(INTERNAL_SERVER_ERROR)

@@ -1,6 +1,5 @@
 package com.leverx.pets.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leverx.pets.dto.person.PersonDto;
 import com.leverx.pets.exception.custom.PersonNotFoundException;
 import com.leverx.pets.model.Person;
@@ -46,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository
                 .findById(id)
                 .orElseThrow(() -> {
-                    log.debug(format(PERSON_ERROR_PATTERN, id));
+                    log.info(format(PERSON_ERROR_PATTERN, id));
                     return new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id));
                 });
     }
@@ -62,7 +61,7 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository
                 .findById(id)
                 .orElseThrow(() -> {
-                    log.debug(format(PERSON_ERROR_PATTERN, id));
+                    log.info(format(PERSON_ERROR_PATTERN, id));
                     return new PersonNotFoundException(format(PERSON_ERROR_PATTERN, id));
                 });
 
