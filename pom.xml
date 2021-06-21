@@ -19,18 +19,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 
-		<!--LOGGING-->
+		<!--LOGGING PROPERTIES-->
 		<slf4j.version>1.7.30</slf4j.version>
-
-		<!--DATABASE-->
+		<!--DATABASE PROPERTIES-->
 		<postgresql.version>42.2.20</postgresql.version>
-
-		<!-- HIBERNATE -->
+		<!-- HIBERNATE PROPERTIES-->
 		<hibernate.version>5.4.10.Final</hibernate.version>
 		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
 		<hibernate.types.version>2.10.4</hibernate.types.version>
-
-		<!--UTIL-->
+		<!--UTIL PROPERTIES-->
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<lombok.version>1.18.12</lombok.version>
 		<model.mapper.version>2.4.3</model.mapper.version>
@@ -119,8 +116,54 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${model.mapper.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.active.profile>dev</spring.active.profile>
+				<!--DATABASE-->
+				<h2.version>1.4.200</h2.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.active.profile>prod</spring.active.profile>
+				<!--DATABASE-->
+				<postgresql.version>42.2.20</postgresql.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>${postgresql.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -137,6 +180,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 </project>
