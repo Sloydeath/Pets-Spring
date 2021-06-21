@@ -116,21 +116,17 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${model.mapper.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
 
 	</dependencies>
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>prod</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<spring.active.profile>dev</spring.active.profile>
+				<spring.active.profile>prod</spring.active.profile>
 				<!--DATABASE-->
 				<h2.version>1.4.200</h2.version>
 			</properties>
@@ -147,9 +143,9 @@
 		</profile>
 
 		<profile>
-			<id>prod</id>
+			<id>dev</id>
 			<properties>
-				<spring.active.profile>prod</spring.active.profile>
+				<spring.active.profile>dev</spring.active.profile>
 				<!--DATABASE-->
 				<postgresql.version>42.2.20</postgresql.version>
 			</properties>
