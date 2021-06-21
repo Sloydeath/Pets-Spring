@@ -1,6 +1,7 @@
 package com.leverx.pets.controller;
 
 import com.leverx.pets.dto.pet.PetDto;
+import com.leverx.pets.dto.pet.ResponsePetDto;
 import com.leverx.pets.dto.pet.SwappingPetsDto;
 import com.leverx.pets.dto.pet.UpdatePetDto;
 import com.leverx.pets.mapper.PetMapper;
@@ -40,50 +41,50 @@ public class PetController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PetDto>> getAllPets() {
+    public ResponseEntity<List<ResponsePetDto>> getAllPets() {
 
-        List<PetDto> responsePetsDto = petService.getAll()
+        List<ResponsePetDto> responsePetsDto = petService.getAll()
                 .stream()
-                .map(petMapper::convertToPetDto)
+                .map(petMapper::convertToResponsePetDto)
                 .collect(toList());
 
         return new ResponseEntity<>(responsePetsDto, OK);
     }
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PetDto> getPetById(@PathVariable Long id) {
+    public ResponseEntity<ResponsePetDto> getPetById(@PathVariable Long id) {
 
         Pet pet = petService.getById(id);
-        PetDto responsePetDto = petMapper.convertToPetDto(pet);
+        ResponsePetDto responsePetDto = petMapper.convertToResponsePetDto(pet);
 
         return new ResponseEntity<>(responsePetDto, OK);
     }
 
     @PostMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PetDto> savePet(@Valid @RequestBody PetDto receivedPetDto) {
+    public ResponseEntity<ResponsePetDto> savePet(@Valid @RequestBody PetDto receivedPetDto) {
 
         Pet pet = petService.create(petMapper.convertToEntity(receivedPetDto));
-        PetDto responsePetDto = petMapper.convertToPetDto(pet);
+        ResponsePetDto responsePetDto = petMapper.convertToResponsePetDto(pet);
 
         return new ResponseEntity<>(responsePetDto, OK);
     }
 
     @PutMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<PetDto> updatePet(@Valid @RequestBody UpdatePetDto updatePetDto,
+    public ResponseEntity<ResponsePetDto> updatePet(@Valid @RequestBody UpdatePetDto updatePetDto,
                                                @PathVariable Long id) {
 
         Pet pet = petService.update(updatePetDto, id);
-        PetDto responsePetDto = petMapper.convertToPetDto(pet);
+        ResponsePetDto responsePetDto = petMapper.convertToResponsePetDto(pet);
 
         return new ResponseEntity<>(responsePetDto, OK);
     }
 
     @PatchMapping(value = "/swapping", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PetDto>> swapPets(@Valid @RequestBody SwappingPetsDto swappingPetsDto) {
+    public ResponseEntity<List<ResponsePetDto>> swapPets(@Valid @RequestBody SwappingPetsDto swappingPetsDto) {
 
-        List<PetDto> responsePetsDto = petService.swappingPets(swappingPetsDto)
+        List<ResponsePetDto> responsePetsDto = petService.swappingPets(swappingPetsDto)
                 .stream()
-                .map(petMapper::convertToPetDto)
+                .map(petMapper::convertToResponsePetDto)
                 .collect(toList());
 
         return new ResponseEntity<>(responsePetsDto, OK);

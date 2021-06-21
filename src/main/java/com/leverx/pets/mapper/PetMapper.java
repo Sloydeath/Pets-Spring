@@ -1,6 +1,7 @@
 package com.leverx.pets.mapper;
 
 import com.leverx.pets.dto.pet.PetDto;
+import com.leverx.pets.dto.pet.ResponsePetDto;
 import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.service.PersonService;
@@ -21,12 +22,12 @@ public class PetMapper {
         this.personService = personService;
     }
 
-    public PetDto convertToPetDto(Pet pet) {
+    public ResponsePetDto convertToResponsePetDto(Pet pet) {
 
-        PetDto petDto = modelMapper.map(pet, PetDto.class);
-        petDto.setPetType(valueOf(pet.getPetType()));
+        ResponsePetDto responsePetDto = modelMapper.map(pet, ResponsePetDto.class);
+        responsePetDto.setPetType(valueOf(pet.getPetType()));
 
-        return petDto;
+        return responsePetDto;
     }
 
     public Pet convertToEntity(PetDto petDto) {
