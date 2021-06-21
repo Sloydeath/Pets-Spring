@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "ff80bc5e-4438-4f9b-a107-215c3286dfa7",
-		"name": "Pets",
+		"_postman_id": "0eaf6328-3d18-48f2-aa7b-4180ad837178",
+		"name": "Pets CF",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -23,12 +23,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/people",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/people",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people"
 							]
@@ -42,12 +40,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/people",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people"
 							]
@@ -61,15 +57,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/people/2",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -90,15 +84,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/people/4",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
-								"3"
+								"4"
 							]
 						}
 					},
@@ -110,15 +102,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/people/1",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -136,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Petya\",\r\n    \"petType\": \"CAT\",\r\n    \"personId\": \"2\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Busya\",\r\n    \"petType\": \"CAT\",\r\n    \"personId\": \"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -144,12 +134,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets"
 							]
@@ -163,12 +151,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets"
 							]
@@ -182,15 +168,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets/4",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
-								"3"
+								"4"
 							]
 						}
 					},
@@ -211,15 +195,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets/4",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
-								"3"
+								"4"
 							]
 						}
 					},
@@ -231,15 +213,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets/3",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets/4",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
-								"3"
+								"4"
 							]
 						}
 					},
@@ -252,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstPetId\": \"1\",\r\n    \"secondPetId\": \"2\"\r\n}",
+							"raw": "{\r\n    \"firstPetId\": \"1\",\r\n    \"secondPetId\": \"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,12 +240,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets/swapping",
-							"protocol": "http",
+							"raw": "{{PETS_CF_URL}}/pets/swapping",
 							"host": [
-								"localhost"
+								"{{PETS_CF_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
 								"swapping"
