@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Kira\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Andrew\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,12 +23,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/people",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/people",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people"
 							]
@@ -42,12 +40,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/people",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people"
 							]
@@ -61,12 +57,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/people/3",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
 								"3"
@@ -90,12 +84,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/people/3",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
 								"3"
@@ -110,12 +102,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/people/3",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/people/3",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"people",
 								"3"
@@ -136,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Bobik\",\r\n    \"petType\": \"CAT\",\r\n    \"personId\": \"1\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nord\",\r\n    \"petType\": \"DOG\",\r\n    \"personId\": \"2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -144,12 +134,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets"
 							]
@@ -163,12 +151,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets"
 							]
@@ -182,15 +168,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets/4",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets/1",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -211,12 +195,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets/1",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets/1",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
 								"1"
@@ -231,12 +213,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pets/3",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets/3",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
 								"3"
@@ -252,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstPetId\": \"1\",\r\n    \"secondPetId\": \"5\"\r\n}",
+							"raw": "{\r\n    \"firstPetId\": \"2\",\r\n    \"secondPetId\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,12 +240,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pets/swapping",
-							"protocol": "http",
+							"raw": "{{PETS_LOCAL_URL}}/pets/swapping",
 							"host": [
-								"localhost"
+								"{{PETS_LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"pets",
 								"swapping"
