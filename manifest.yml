@@ -4,3 +4,8 @@ applications:
     instances: 1
     path: target/Pets-Spring-0.0.1-SNAPSHOT.jar
     buildpack: https://github.com/cloudfoundry/java-buildpack.git#v4.36
+    env:
+      SPRING_PROFILES_ACTIVE: cloud
+    services:
+      - logger
+      - postgres

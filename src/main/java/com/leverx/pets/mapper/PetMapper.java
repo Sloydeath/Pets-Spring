@@ -6,6 +6,7 @@ import com.leverx.pets.model.Person;
 import com.leverx.pets.model.pet.Pet;
 import com.leverx.pets.service.PersonService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.leverx.pets.factory.PetFactory.getPet;
@@ -17,6 +18,7 @@ public class PetMapper {
     private final ModelMapper modelMapper;
     private final PersonService personService;
 
+    @Autowired
     public PetMapper(ModelMapper modelMapper, PersonService personService) {
         this.modelMapper = modelMapper;
         this.personService = personService;

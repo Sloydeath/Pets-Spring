@@ -23,6 +23,7 @@
 		<slf4j.version>1.7.30</slf4j.version>
 		<!--DATABASE PROPERTIES-->
 		<postgresql.version>42.2.20</postgresql.version>
+		<h2.version>1.4.200</h2.version>
 		<!-- HIBERNATE PROPERTIES-->
 		<hibernate.version>5.4.10.Final</hibernate.version>
 		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
@@ -71,6 +72,12 @@
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>runtime</scope>
+		</dependency>
 
 		<!--HIBERNATE-->
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
@@ -116,9 +123,9 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${model.mapper.version}</version>
 		</dependency>
-
 	</dependencies>
 
+	<!--PROFILES-->
 	<profiles>
 		<profile>
 			<id>prod</id>
@@ -127,7 +134,6 @@
 			</activation>
 			<properties>
 				<spring.active.profile>prod</spring.active.profile>
-				<!--DATABASE-->
 				<h2.version>1.4.200</h2.version>
 			</properties>
 			<dependencies>
@@ -146,7 +152,25 @@
 			<id>dev</id>
 			<properties>
 				<spring.active.profile>dev</spring.active.profile>
+				<!--DATABASE PROPERTIES-->
+				<postgresql.version>42.2.20</postgresql.version>
+			</properties>
+			<dependencies>
 				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>${postgresql.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>cloud</id>
+			<properties>
+				<spring.active.profile>cloud</spring.active.profile>
+				<!--DATABASE PROPERTIES-->
 				<postgresql.version>42.2.20</postgresql.version>
 			</properties>
 			<dependencies>
