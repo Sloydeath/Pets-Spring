@@ -21,13 +21,17 @@
 
 		<!--LOGGING PROPERTIES-->
 		<slf4j.version>1.7.30</slf4j.version>
+		<logback.version>1.2.3</logback.version>
+
 		<!--DATABASE PROPERTIES-->
 		<postgresql.version>42.2.20</postgresql.version>
 		<h2.version>1.4.200</h2.version>
+
 		<!-- HIBERNATE PROPERTIES-->
 		<hibernate.version>5.4.10.Final</hibernate.version>
 		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
 		<hibernate.types.version>2.10.4</hibernate.types.version>
+
 		<!--UTIL PROPERTIES-->
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<lombok.version>1.18.12</lombok.version>
@@ -63,6 +67,16 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sap.hcp.cf.logging</groupId>
+			<artifactId>cf-java-logging-support-logback</artifactId>
 		</dependency>
 
 		<!--DATABASE-->
@@ -123,7 +137,25 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${model.mapper.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sap.cloud.security.xsuaa</groupId>
+			<artifactId>token-client</artifactId>
+			<version>2.7.7</version>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.sap.cloud.sdk</groupId>
+				<artifactId>sdk-bom</artifactId>
+				<version>3.45.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<!--PROFILES-->
 	<profiles>

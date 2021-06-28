@@ -59,10 +59,8 @@ There are 3 profiles: dev, prod, cloud.
 3. Build project with command:
 
 
-    mvn -P<profile name> clean install
+    mvn clean install
 
-    <profile name> - prod (with H2 database) or cloud (with PostgreSQL)
-    (For example: mvn -Pcloud clean install)
 
 4. Install cf CLI on your computer.
 5. Sign up on the site and create trial account:
