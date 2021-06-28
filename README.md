@@ -16,10 +16,10 @@
 
 ## Deployment
 
-There are 3 profiles: dev, prod, cloud.
+There are 3 profiles: dev, test, cloud.
 * dev profile - uses local database PostgreSQL;
-* prod profile - uses H2 database in CF;
 * cloud profile - uses PostgreSQL database in CF.
+* test profile - uses local H2 database for test;
 
 ### Local deployment
 1. Clone git repository:
@@ -47,6 +47,7 @@ There are 3 profiles: dev, prod, cloud.
     postman/Pets Local.postman_collection.json
     postman/URLS_FOR_PETS_API.postman_environment.json
     ```
+7. You can run app with test profile if you want to use H2 database.
    
 ### Cloud Foundry deployment
 1. Clone git repository:
@@ -54,20 +55,17 @@ There are 3 profiles: dev, prod, cloud.
     https://github.com/Sloydeath/Pets-Spring.git
     ```
 
-2. If you want to run app in cf with H2 database, you should delete postgres service from manifest.yml.
-   If you want to rup app in cf with Postgres database, you should add postgres service in manifest.yml
-3. Build project with command:
-
-
+2. Build project with command:
+    ```
     mvn clean install
+    ```
 
-
-4. Install cf CLI on your computer.
-5. Sign up on the site and create trial account:
+3. Install cf CLI on your computer.
+4. Sign up on the site and create trial account:
    ```
    https://account.hanatrial.ondemand.com/
    ```
-6. To log in to the cf CLI:
+5. To log in to the cf CLI:
     * Run in cmd:
       ```
       cf login -a API-URL -u USERNAME -p PASSWORD -o ORG -s SPACE
@@ -82,15 +80,18 @@ There are 3 profiles: dev, prod, cloud.
       ```
       https://docs.cloudfoundry.org/cf-cli/getting-started.html
       ```
-7. If you want to run application with cloud profile, you should run this command in CMD:
-   ```
-   cf ssh -L 63306:postgres-a8cbc12a-eb4e-466b-9d1b-42f8d4edb141.ce4jcviyvogb.eu-central-1.rds.amazonaws.com:2439 pets-spring-leverx
-   ```
-8. Open cmd in the root folder of project and run:
+
+6. Open cmd in the root folder of project and run:
    ```
    cf push
    ```
-9. If you want to test app, you should install postman and import files:
+   
+7. If you want to establish connection in intellij with cloud postgres, you should run this command in CMD:
+   ```
+   cf ssh -L 63306:postgres-a8cbc12a-eb4e-466b-9d1b-42f8d4edb141.ce4jcviyvogb.eu-central-1.rds.amazonaws.com:2439 pets-spring-leverx
+   ```
+
+8. If you want to test app, you should install postman and import files:
     ```
     postman/Pets_CF.postman_collection.json
     postman/URLS_FOR_PETS_API.postman_environment.json

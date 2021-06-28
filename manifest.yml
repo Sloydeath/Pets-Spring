@@ -10,3 +10,4 @@ applications:
     services:
       - logger
       - postgres
+      - destination

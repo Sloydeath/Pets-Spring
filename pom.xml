@@ -201,11 +201,11 @@
 			</dependencies>
 		</profile>
 
-		<!--prod-->
+		<!--test-->
 		<profile>
-			<id>prod</id>
+			<id>test</id>
 			<properties>
-				<spring.active.profile>prod</spring.active.profile>
+				<spring.active.profile>test</spring.active.profile>
 				<h2.version>1.4.200</h2.version>
 			</properties>
 			<dependencies>
