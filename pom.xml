@@ -159,29 +159,13 @@
 
 	<!--PROFILES-->
 	<profiles>
+
+		<!-- dev (BY DEFAULT) -->
 		<profile>
-			<id>prod</id>
+			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
-				<spring.active.profile>prod</spring.active.profile>
-				<h2.version>1.4.200</h2.version>
-			</properties>
-			<dependencies>
-				<!--DATABASE-->
-				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-				<dependency>
-					<groupId>com.h2database</groupId>
-					<artifactId>h2</artifactId>
-					<version>${h2.version}</version>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-
-		<profile>
-			<id>dev</id>
 			<properties>
 				<spring.active.profile>dev</spring.active.profile>
 				<!--DATABASE PROPERTIES-->
@@ -198,6 +182,7 @@
 			</dependencies>
 		</profile>
 
+		<!--cloud-->
 		<profile>
 			<id>cloud</id>
 			<properties>
@@ -212,6 +197,25 @@
 					<groupId>org.postgresql</groupId>
 					<artifactId>postgresql</artifactId>
 					<version>${postgresql.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<!--prod-->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.active.profile>prod</spring.active.profile>
+				<h2.version>1.4.200</h2.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+					<scope>runtime</scope>
 				</dependency>
 			</dependencies>
 		</profile>
