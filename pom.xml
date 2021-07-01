@@ -19,9 +19,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 
-		<!--SPRING BOOT STARTERS-->
-		<spring.cloud.version>3.0.3</spring.cloud.version>
-
 		<!--LOGGING PROPERTIES-->
 		<slf4j.version>1.7.30</slf4j.version>
 		<logback.version>1.2.3</logback.version>
@@ -41,10 +38,6 @@
 		<lombok.version>1.18.12</lombok.version>
 		<model.mapper.version>2.4.3</model.mapper.version>
 
-		<!--SAP CLOUD-->
-		<sap.cloud.version>3.46.0</sap.cloud.version>
-		<sap.cds.feature.version>1.16.2</sap.cds.feature.version>
-		<sap.cds.integration.version>1.16.2</sap.cds.integration.version>
 	</properties>
 
 	<dependencies>
@@ -69,30 +62,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter</artifactId>
-			<version>${spring.cloud.version}</version>
-		</dependency>
-
-		<!-- SAP cloud -->
-		<dependency>
-			<groupId>com.sap.cloud.sdk.cloudplatform</groupId>
-			<artifactId>scp-cf</artifactId>
-			<version>${sap.cloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sap.cds</groupId>
-			<artifactId>cds-feature-cloudfoundry</artifactId>
-			<version>${sap.cds.feature.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sap.cds</groupId>
-			<artifactId>cds-integration-cloud-sdk</artifactId>
-			<version>${sap.cds.integration.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!--LOGGING-->
