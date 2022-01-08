@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.leverx</groupId>
+	<artifactId>Pets-Spring</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Pets-Spring</name>
+	<description>Project Pets</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+
+		<!--LOGGING PROPERTIES-->
+		<slf4j.version>1.7.30</slf4j.version>
+		<logback.version>1.2.3</logback.version>
+		<cf.logback.version>3.4.0</cf.logback.version>
+
+		<!--DATABASE PROPERTIES-->
+		<postgresql.version>42.2.20</postgresql.version>
+		<h2.version>1.4.200</h2.version>
+
+		<!-- HIBERNATE PROPERTIES-->
+		<hibernate.version>5.4.10.Final</hibernate.version>
+		<hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
+		<hibernate.types.version>2.10.4</hibernate.types.version>
+
+		<!--UTIL PROPERTIES-->
+		<commons.lang3.version>3.5</commons.lang3.version>
+		<lombok.version>1.18.12</lombok.version>
+		<model.mapper.version>2.4.3</model.mapper.version>
+
+	</properties>
+
+	<dependencies>
+
+		<!--SPRING-BOOT-STARTERS-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!--LOGGING-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sap.hcp.cf.logging</groupId>
+			<artifactId>cf-java-logging-support-logback</artifactId>
+			<version>${cf.logback.version}</version>
+		</dependency>
+
+		<!--DATABASE-->
+		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!--HIBERNATE-->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>${hibernate.types.version}</version>
+		</dependency>
+
+		<!--UTIL-->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${model.mapper.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<!--PROFILES-->
+	<profiles>
+
+		<!-- dev (BY DEFAULT) -->
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.active.profile>dev</spring.active.profile>
+				<!--DATABASE PROPERTIES-->
+				<postgresql.version>42.2.20</postgresql.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>${postgresql.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<!--cloud-->
+		<profile>
+			<id>cloud</id>
+			<properties>
+				<spring.active.profile>cloud</spring.active.profile>
+				<!--DATABASE PROPERTIES-->
+				<postgresql.version>42.2.20</postgresql.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<version>${postgresql.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<!--test-->
+		<profile>
+			<id>test</id>
+			<properties>
+				<spring.active.profile>test</spring.active.profile>
+				<h2.version>1.4.200</h2.version>
+			</properties>
+			<dependencies>
+				<!--DATABASE-->
+				<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<version>${h2.version}</version>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+</project>
